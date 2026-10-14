@@ -1,0 +1,111 @@
+.admin-container{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: flex-start;
+   height: 100vh;
+   width: 100vw;
+   padding-top: 50px;
+   gap: 20px;
+}
+
+.text-area{
+   width: 500px;
+   height: 100px;
+   max-width: 100%;
+   padding: 10px;
+   font-size: 1rem;
+   background-color: #f8f9fa;
+   color: #495057;
+   border-radius: 5px;
+}
+
+.list{
+   display: flex;
+   flex-direction: column;
+   width: 500px;
+   max-height: 300px;
+   overflow-y: auto;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   padding: 10px;
+   max-width: 80%;
+}
+
+.actionsList{
+   display: flex;
+   margin-top: 10px;
+   gap: 10px;
+}
+
+.btEdit{
+   padding: 5px;
+   font-size: 1rem;
+   background-color: #007bff;
+   color: white;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   transition: background-color 0.3s ease;
+}
+
+.btConcluir{
+   padding: 5px;
+   font-size: 1rem;
+   background-color: #28a745;
+   color: white;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   transition: background-color 0.3s ease;
+}
+
+.btEdit:hover{
+   background-color: #0056b3;
+}
+
+.btConcluir:hover{
+   background-color: #1e7e34;
+}
+
+.formAdmin{
+   display: flex;
+   flex-direction: column;
+   width: 80%;
+   max-width: 500px;
+   gap: 10px;
+}
+
+.formAdmin button{
+   padding: 10px;
+   font-size: 1rem;
+   background-color: #007bff;
+   color: white;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   transition: background-color 0.3s ease;
+}
+
+.formAdmin button:hover{
+   background-color: #0056b3;
+}
+
+.btLogout{
+   position: absolute;
+   bottom: 20px;
+   left: 20px;
+   padding: 10px;
+   font-size: 1rem;
+   background-color: #dc3545;
+   color: white;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   font-weight: bold;
+   transition: background-color 0.3s ease;
+}
+
+.btLogout:hover{
+   background-color: #c82333;
+}

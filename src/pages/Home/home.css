@@ -9,11 +9,11 @@ body{
    justify-content: center;
    height: 100vh;
    width: 100vw;
+   text-align: center;
 }
 
 .home-container h1{
    font-size: 3rem;
-   color: #333;
    margin-bottom: 1rem;
 }
 
@@ -30,6 +30,7 @@ body{
    font-size: 1rem;
    border: 1px solid #ccc;
    border-radius: 5px;
+   background-color: #f8f9fa1f;
 }
 
 .form button{

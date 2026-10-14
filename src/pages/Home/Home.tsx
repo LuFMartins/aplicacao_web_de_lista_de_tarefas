@@ -1,22 +1,47 @@
 import { useState } from "react";
-import {Link} from "react-router-dom"
-
+import { Link } from "react-router-dom"
 import "./home.css"
+
+import { auth } from "../../firebaseConnection.ts"
+import { signInWithEmailAndPassword } from "firebase/auth";
+
+import { useNavigate } from "react-router-dom";
 
 function Home() {
 
    const [email, setEmail] = useState('');
    const [senha, setSenha] = useState('');
 
-   function handleLogin(e: React.FormEvent<HTMLFormElement>) {
+   // Hook do React Router para navegação programática
+   const navigate = useNavigate(); 
+
+
+   // Função para lidar com o login do usuário
+   async function handleLogin(e: React.SubmitEvent<HTMLFormElement>) {
       e.preventDefault(); // Evita que a página seja recarregada ao enviar o formulário
 
-      if(email === '' || senha === '') {
+      if (email === '' || senha === '') {
          alert('Preencha todos os campos');
          return;
       }
 
-      alert(`Email: ${email}\nSenha: ${senha}`);
+      try {
+
+         await signInWithEmailAndPassword(auth, email, senha)
+         navigate('/admin', { replace: true })
+
+      } catch (error: any) {
+         
+         error.code === 'auth/invalid-credential' && alert('Email ou senha inválidos')
+         error.code === 'auth/user-not-found' && alert('Usuário não encontrado')
+         error.code === 'auth/invalid-email' && alert('Email inválido')
+         error.code === 'auth/wrong-password' && alert('Senha incorreta')
+
+         setEmail('');
+         setSenha('');
+
+      }
+
    }
 
    return (
