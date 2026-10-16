@@ -25,6 +25,7 @@ export default function Private({ children }: { children: React.ReactNode }) {
                setLogado(true);
             } else {
                // Usuário não está logado
+               localStorage.removeItem('@userDetails'); // Remove os dados do usuário do localStorage
                setLoading(false);
                setLogado(false);
             }
