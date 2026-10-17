@@ -12,7 +12,7 @@ export default function Private({ children }: { children: React.ReactNode }) {
 
    useEffect(() => {
 
-      async function checkLogin() {
+      function checkLogin() {
          const unsub = onAuthStateChanged(auth, (user) => { // Verifica se o usuário está logado
             if (user) {
                const userData = {
@@ -32,6 +32,7 @@ export default function Private({ children }: { children: React.ReactNode }) {
             }
          });
 
+         return unsub;
       }
 
       checkLogin();
