@@ -1,4 +1,4 @@
-# React Login Firebase
+# Aplicação web de lista de tarefas
 
 Aplicação web de lista de tarefas criada com o objetivo de estudar React e a comunicação com o Firebase. O projeto reúne autenticação de usuários, rotas protegidas e operações de leitura e escrita em tempo real no Cloud Firestore.
 
