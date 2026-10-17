@@ -20,16 +20,29 @@
    border-radius: 5px;
 }
 
+.containerList{
+   display: flex;
+   flex-direction: column;
+   gap:10px;
+   overflow-y: auto;
+   scrollbar-width: none;
+   max-height: 500px;
+   width: 500px;
+   max-width: 80%;
+   padding-bottom: 40px;
+}
+
 .list{
    display: flex;
    flex-direction: column;
-   width: 500px;
    max-height: 300px;
    overflow-y: auto;
    border: 1px solid #ccc;
    border-radius: 5px;
    padding: 10px;
-   max-width: 80%;
+   max-width: 100%;
+   overflow: clip;
+   padding: 10px;
 }
 
 .actionsList{

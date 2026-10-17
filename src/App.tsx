@@ -12,7 +12,7 @@ function App() {
         hideProgressBar={false}
         newestOnTop
         closeOnClick
-        theme='colored'
+        theme='dark'
       />
     </>
   );

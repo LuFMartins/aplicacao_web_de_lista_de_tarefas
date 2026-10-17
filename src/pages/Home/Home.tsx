@@ -5,6 +5,8 @@ import "./home.css"
 import { auth } from "../../firebaseConnection.ts"
 import { signInWithEmailAndPassword } from "firebase/auth";
 
+import { toast } from "react-toastify";
+
 import { useNavigate } from "react-router-dom";
 
 function Home() {
@@ -21,7 +23,7 @@ function Home() {
       e.preventDefault(); // Evita que a página seja recarregada ao enviar o formulário
 
       if (email === '' || senha === '') {
-         alert('Preencha todos os campos');
+         toast.info('Preencha todos os campos');
          return;
       }
 
@@ -32,10 +34,10 @@ function Home() {
 
       } catch (error: any) {
          
-         error.code === 'auth/invalid-credential' && alert('Email ou senha inválidos')
-         error.code === 'auth/user-not-found' && alert('Usuário não encontrado')
-         error.code === 'auth/invalid-email' && alert('Email inválido')
-         error.code === 'auth/wrong-password' && alert('Senha incorreta')
+         error.code === 'auth/invalid-credential' && toast.error('Email ou senha inválidos')
+         error.code === 'auth/user-not-found' && toast.error('Usuário não encontrado')
+         error.code === 'auth/invalid-email' && toast.error('Email inválido')
+         error.code === 'auth/wrong-password' && toast.error('Senha incorreta')
 
          setEmail('');
          setSenha('');

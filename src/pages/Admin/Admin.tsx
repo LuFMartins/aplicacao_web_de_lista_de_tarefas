@@ -14,16 +14,22 @@ import {
    orderBy, // Permite ordenar os resultados de uma consulta no Firestore
    where, // Permite filtrar os resultados de uma consulta no Firestore
    deleteDoc, // Permite deletar documentos no Firestore
-   doc // Permite referenciar um documento específico no Firestore
+   doc, // Permite referenciar um documento específico no Firestore
+   updateDoc // 
 } from "firebase/firestore";
 
-import {toast} from 'react-toastify'
+import { toast } from 'react-toastify'
+
+type Tarefa = {
+   id: string;
+   tarefa: string;
+}
 
 function Admin() {
    const [tarefa, setTarefa] = useState('');
    const [user, setUser] = useState<any>({});
    const [tarefas, setTarefas] = useState<any[]>([]);
-
+   const [edit, setEdit] = useState<Tarefa | null>(null)
 
    useEffect(() => {
       async function loadTarefas() {
@@ -44,7 +50,7 @@ function Admin() {
 
             );
 
-            const unsub = onSnapshot(q, (snapshot /** snapshot representa o resultado da consulta q */) => {
+            onSnapshot(q, (snapshot /** snapshot representa o resultado da consulta q */) => {
                // let lista: any[] = [];
 
                // snapshot.forEach((doc) => {
@@ -83,6 +89,11 @@ function Admin() {
          return;
       }
 
+      if (edit?.id) {
+         handleUpdateTarefa();
+         return
+      }
+
       try {
          await addDoc(collection(db, 'tarefas'), { //addDoc gera um id automático único para cada tarefa
             tarefa: tarefa,
@@ -109,13 +120,42 @@ function Admin() {
       await signOut(auth);
    }
 
-   async function handleConcluiTarefa(id: string){
-      try{
+   async function handleConcluiTarefa(id: string) {
+      try {
          const docRef = doc(db, 'tarefas', id)
          await deleteDoc(docRef);
          console.log('Tarefa concluida com sucesso!');
       } catch (error: any) {
-         alert('Erro ao finalizar a tarefa');
+         toast.error('Erro ao finalizar a tarefa');
+      }
+   }
+
+   function editTarefa(item: any) {
+      setTarefa(item.tarefa)
+      setEdit(item)
+   }
+
+   async function handleUpdateTarefa() {
+
+      if(!edit){
+         return;
+      }
+
+      try {
+         const docRef = doc(db, "tarefas", edit.id)
+
+         await updateDoc(docRef, {
+            tarefa: tarefa
+         })
+
+         toast.success('Tarefa Atualizada!')
+         setTarefa('')
+         setEdit(null)
+
+      } catch (error) {
+         toast.error('Erro ao Editar Tarefa!')
+         setTarefa('')
+         setEdit(null)
       }
    }
 
@@ -130,18 +170,24 @@ function Admin() {
                value={tarefa}
                onChange={(e) => setTarefa(e.target.value)}
             />
-            <button type="submit">Adicionar Tarefa</button>
+
+            {/* Object.keys() ==>  é um método do JavaScript que retorna um array com os nomes das propriedades enumeráveis de um objeto */}
+            {!edit ? <button type="submit">Adicionar Tarefa</button> : <button onClick={() => handleUpdateTarefa()} style={{ backgroundColor: "darkgoldenrod" }}>Editar Tarefa</button>}
+
+
          </form>
 
-         {tarefas.map(item => (
-            <article className="list" key={item.id}>
+         <div className='containerList'>
+            {tarefas.map(item => (
+               <article className="list" key={item.id}>
                   <p>{item.tarefa}</p>
                   <div className="actionsList">
-                     <button className="btEdit">Editar</button>
+                     <button className="btEdit" onClick={() => editTarefa(item)}>Editar</button>
                      <button className="btConcluir" onClick={() => handleConcluiTarefa(item.id)}>Concluir</button>
                   </div>
-            </article>
-         ))}
+               </article>
+            ))}
+         </div>
 
 
          <button className='btLogout' onClick={handleLogout}>

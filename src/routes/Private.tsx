@@ -3,6 +3,7 @@ import { auth } from "../firebaseConnection.ts"
 import { onAuthStateChanged } from "firebase/auth";
 
 import { Navigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Private({ children }: { children: React.ReactNode }) {
 
