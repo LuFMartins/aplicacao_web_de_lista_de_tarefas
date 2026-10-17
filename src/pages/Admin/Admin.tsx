@@ -124,6 +124,7 @@ function Admin() {
       try {
          const docRef = doc(db, 'tarefas', id)
          await deleteDoc(docRef);
+         toast.success('Tarefa Concluida!')
          console.log('Tarefa concluida com sucesso!');
       } catch (error: any) {
          toast.error('Erro ao finalizar a tarefa');
