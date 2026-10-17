@@ -8,7 +8,6 @@ import { db } from "../../firebaseConnection.ts"
 import {
    addDoc, // Permite adicionar documentos no Firestore
    collection, // Permite adicionar documentos em uma coleção no Firestore
-   getDocs, // Permite buscar documentos em uma coleção no Firestore
    onSnapshot, // Permite ouvir alterações em tempo real no Firestore
    query, // Permite criar consultas no Firestore
    orderBy, // Permite ordenar os resultados de uma consulta no Firestore
